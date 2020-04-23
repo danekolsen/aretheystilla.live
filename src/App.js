@@ -18,18 +18,28 @@
 //  -Fix CSS on results                                                 DONE
 //  -See about setting up a user profile for wikipedia best practices   DONE
 //  -Comment and organize SASS                                          DONE
-//  -LAUNCH
+//  -No repeat emojis on one render                                     DONE
+//  -Let Che build the emojie arrays                                    DONE
+//  -LAUNCH                                                             DONE
+//  -Put results in close-able modal to make app appear as single page  DONE
+//  -Make disclaimer box go away when user enters text in input field   DONE
+
+//  -Phone layout still needs tweaking(why does results cause side-scrolling?)
 
 //     v2.0
-//  -Make disclaimer box go away when user enters text in input field
+//  -Test list of knows problem searches:
+//                {"Mike the headless chicken": returns dead}, (Search for list of "individual animals")
+//                {"Harambe": returns dead but no image}
+//                {"Chris Evans": returns nothing},
+//                {"Mike Jones": returns nothing}
+//  -Implement Google Analytics
+//  -Ads?
 //  -For easter eggs, move randomized text to upper left or something so it doesn't conflict with easter egg text
-//  -No repeat emojis on one render
-//  -Let Che build the emojie arrays
-//  -Experiment with emojies more on edge of photo
+//  -Experiment with emojies more on edge of photo(redefine grid/boundaries)
 //  -Implement loading spinner for data retrieval time
 //  -Search the first 10 results for an entry that fits a criteria
 //  -Export final result as an image
-//  -Send images to social media
+//  -Send images to social media(Look up how share buttons function)
 
 import React from "react";
 import SearchApp from "./components/SearchApp.component";

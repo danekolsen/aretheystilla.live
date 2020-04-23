@@ -1,6 +1,5 @@
 import React from "react";
 import wtf from "wtf_wikipedia";
-import Results from "./Results.component";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -11,6 +10,7 @@ class SearchBar extends React.Component {
       properName: "",
       resultImg: "",
       info: "",
+      error: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -71,6 +71,7 @@ class SearchBar extends React.Component {
         resultImg: "",
         cleanedName: "",
         info: "",
+        error: false,
       };
     });
 
@@ -134,17 +135,23 @@ class SearchBar extends React.Component {
           // Checks state to see if search results came back with a person, if it didn't, it udpates state with no person found to send to Results.
           if (this.state.info === "") {
             this.setState((state) => {
-              return { info: "nothing", properName: "", resultImg: "" };
+              return {
+                properName: "",
+                resultImg: "",
+                error: true,
+              };
             });
           }
         } else {
           // Sends "nothing found" message to state->Results when nothing is returned from Wikipedia.
           this.setState((state) => {
-            return { info: "nothing" };
+            return { error: true };
           });
         }
         // Sends state after updated with results to the Results component.
-        this.props.action(this.state);
+        if (this.state.error === false) {
+          this.props.action(this.state);
+        }
       });
     // Resets the input bar for new search.
     this.setState((state) => {
@@ -153,6 +160,11 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const errorText = (
+      <span>
+        No <span>🎲</span> dice 🎲! 🤷 Try again!
+      </span>
+    );
     return (
       <div className="searchBar">
         <form onSubmit={this.handleSubmit}>
@@ -189,6 +201,7 @@ class SearchBar extends React.Component {
             </span>
           </button>
         </form>
+        <p id="error">{this.state.error ? errorText : null}</p>
       </div>
     );
   }

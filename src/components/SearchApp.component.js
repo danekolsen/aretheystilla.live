@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import SearchBar from "./SearchBar.component";
 import Results from "./Results.component";
 
@@ -9,22 +9,35 @@ export class SearchApp extends React.Component {
     super(props);
     this.state = {
       searchResults: {},
+      displayResults: false,
     };
-    this.handler = this.searchHandler.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
+    this.closeHandler = this.closeHandler.bind(this);
   }
 
   // Handles data sent back from the SearchBar component
   searchHandler = (results) => {
-    this.setState({ searchResults: results });
+    this.setState({ searchResults: results, displayResults: true });
+  };
+
+  closeHandler = () => {
+    this.setState({ displayResults: false });
   };
 
   render() {
-    return (
-      <div>
-        <SearchBar action={this.searchHandler} />
-        <Results results={this.state.searchResults} />
-      </div>
-    );
+    if (this.state.displayResults) {
+      return (
+        <React.Fragment>
+          <SearchBar action={this.searchHandler} />
+          <Results
+            action={this.closeHandler}
+            results={this.state.searchResults}
+          />
+        </React.Fragment>
+      );
+    } else {
+      return <SearchBar action={this.searchHandler} />;
+    }
   }
 }
 

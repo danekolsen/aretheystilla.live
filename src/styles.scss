@@ -8,17 +8,20 @@
 // GLOBAL STYLES
 
 body {
-  padding: 15px 0px;
   color: white;
   background-color: #222222;
   font-family: Helvetica, sans-serif;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 .App {
+  position: relative;
   width: 100%;
   max-width: 500px;
+  height: 100vh;
+  max-height: 850px;
   margin: 0 auto;
+  padding: 20px 0px;
 }
 
 h1 {
@@ -66,10 +69,15 @@ input {
   text-align: center;
 }
 
+#error {
+  color: red;
+  font-weight: bold;
+  font-size: 28px;
+}
+
 // STYLES FOR THE INFO/DISCLAIMER SECTION
 
 #discl-div {
-  position: relative;
   padding: 20px 0px;
 
   p {
@@ -83,18 +91,19 @@ input {
   right: 30px;
   cursor: pointer;
   font-size: 40px;
-  z-index: 20;
+  z-index: 10;
 }
 
 #discl-text {
   width: 100%;
+  height: 100%;
   position: absolute;
-  bottom: 0px;
+  top: 0px;
   left: 0px;
   background-color: rgba($color: black, $alpha: 0.9);
   border-radius: 10px;
   padding: 40px 10px;
-  z-index: 19;
+  z-index: 9;
 }
 
 .showInfo {
@@ -169,54 +178,81 @@ span.skull {
 
 // STYLES FOR SEARCH RESULTS
 
+.results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($color: black, $alpha: 0.9);
+  z-index: 19;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 #resultsContainer {
   margin: 0 auto;
-  min-height: 350px;
-  position: relative;
-  width: 90%;
-  img {
-    width: 95%;
-    max-width: 400px;
-    margin: 40px auto;
-    display: block;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  #imgCanvas {
+    position: relative;
+
+    img {
+      width: 95%;
+      max-width: 450px;
+      margin: 0px auto;
+      display: block;
+    }
+    span {
+      font-size: 35px;
+      position: absolute;
+      text-shadow: 1px 1px 3px #000000;
+    }
+
+    #resultsInfo {
+      width: 100%;
+      text-align: center;
+      font-size: 50px;
+      position: absolute;
+      font-family: "Permanent Marker", cursive;
+      left: 50%;
+      bottom: -50px;
+      text-decoration: underline;
+      text-transform: uppercase;
+      z-index: 9;
+      text-shadow: 2px 2px 4px #000000;
+      margin: 50px auto;
+    }
+    #easterEgg {
+      width: 100%;
+      font-size: 25px;
+      position: absolute;
+      font-family: "Permanent Marker", cursive;
+      text-decoration: underline;
+      text-transform: uppercase;
+      z-index: 9;
+    }
   }
-  span {
-    font-size: 35px;
+
+  #close-btn {
     position: absolute;
-    text-shadow: 1px 1px 3px #000000;
+    font-size: 26px;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
   }
+
   #name {
     width: 100%;
     font-size: 40px;
     text-align: center;
     font-family: "Permanent Marker", cursive;
-    margin-bottom: -45px;
     text-decoration: underline;
     text-transform: uppercase;
-    text-shadow: 1px 1px 3px #000000;
-  }
-  #resultsInfo {
-    width: 100%;
-    text-align: center;
-    font-size: 50px;
-    position: absolute;
-    font-family: "Permanent Marker", cursive;
-    left: 50%;
-    bottom: -50px;
-    text-decoration: underline;
-    text-transform: uppercase;
-    z-index: 9;
-    text-shadow: 2px 2px 4px #000000;
-    margin: 50px auto;
-  }
-  #easterEgg {
-    width: 100%;
-    font-size: 25px;
-    position: absolute;
-    font-family: "Permanent Marker", cursive;
-    text-decoration: underline;
-    text-transform: uppercase;
-    z-index: 9;
   }
 }
 

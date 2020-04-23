@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 export class Results extends React.Component {
   constructor(props) {
@@ -14,10 +14,10 @@ export class Results extends React.Component {
             "Still Kickin'!",
             "ALIVE AF",
             "Stayin' Alive!",
-            "Still Breathin'!"
+            "Still Breathin'!",
           ],
           emoji: [
-            ["🎉", "🎊", "✨", "🌈","🥇", "💋", "⭐️", "🌟"],
+            ["🎉", "🎊", "✨", "🌈", "🥇", "💋", "⭐️", "🌟"],
             ["🥳", "😁", "😄", "😍", "😘", "👍", "🙌", "👏"],
             ["💕", "💖", "💯", "❤️", "💜", "💙", "❣️", "💓", "♥️"],
           ],
@@ -46,7 +46,7 @@ export class Results extends React.Component {
             "Maybe magical?",
           ],
           emoji: [
-            ["🤨","🧐", "🤔", "🤭", "😶", "😬", "😯"],
+            ["🤨", "🧐", "🤔", "🤭", "😶", "😬", "😯"],
             ["🧙‍♀️", "🧙", "🧙‍♂️", "🧝‍♀️", "🧝", "🧝‍♂️", "🧜‍♀️", "🧞‍♂️", "🧜", "🧚‍♀️", "🐉"],
             ["🎬", "📖", "👀", "🎭", "⌛️", "🤷‍♀️", "🤷‍♂️", "🤦‍♀️", "🤦‍♂️"],
           ],
@@ -160,22 +160,35 @@ export class Results extends React.Component {
       this.easterEmoji = "🇨🇦❤️🤍❤️🇨🇦👀🔥🔥🔥";
     }
     return (
-      <div id="resultsContainer">
-        <h2 id="name">{this.props.results.properName}</h2>
-        <p style={infoStyle} id="resultsInfo">
-          {this.exclamation}
-        </p>
-        <p style={easterEggStyle} id="easterEgg">
-          {this.easterEgg}
-        </p>
-        <span style={emoji1Style}>{this.emoji1}</span>
-        <span style={emoji2Style}>{this.emoji2}</span>
-        <span style={emoji3Style}>{this.emoji3}</span>
-        <span style={easterEmojiStyle}>{this.easterEmoji}</span>
-        <img
-          src={this.props.results.resultImg}
-          alt={this.props.results.properName}
-        ></img>
+      <div className="results">
+        <div id="resultsContainer">
+          <span
+            id="close-btn"
+            onClick={this.props.action}
+            role="button"
+            aria-label="close button"
+          >
+            ❌
+          </span>
+          <h2 id="name">{this.props.results.properName}</h2>
+
+          <div id="imgCanvas">
+            <p style={infoStyle} id="resultsInfo">
+              {this.exclamation}
+            </p>
+            <p style={easterEggStyle} id="easterEgg">
+              {this.easterEgg}
+            </p>
+            <span style={emoji1Style}>{this.emoji1}</span>
+            <span style={emoji2Style}>{this.emoji2}</span>
+            <span style={emoji3Style}>{this.emoji3}</span>
+            <span style={easterEmojiStyle}>{this.easterEmoji}</span>
+            <img
+              src={this.props.results.resultImg}
+              alt={this.props.results.properName}
+            ></img>
+          </div>
+        </div>
       </div>
     );
   }
