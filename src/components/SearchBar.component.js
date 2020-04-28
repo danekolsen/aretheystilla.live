@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
       properName: "",
       resultImg: "",
       info: "",
-      error: false,
+      error: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -84,87 +84,154 @@ class SearchBar extends React.Component {
         "Api-User-Agent": "dkowebdev@gmail.com",
       })
       .then((doc) => {
-        // console.log(doc);
-        // Makes sure the fetch returned anything at all before checking categories.
-        if (doc != null) {
-          // console.log(doc.categories()); //Does the search term have categories?
-          // Checks returned categories for the phrase 'Living people' and then updates state with a true for dead.
-          const livingPerson = doc
-            .categories()
-            .find((cat) => cat.match(/Living people/));
-          // console.log(Boolean(livingPerson));
-          if (Boolean(livingPerson)) {
-            this.setState((state) => {
-              return { info: "living" };
-            });
-          }
-          // Checks returned categories for the word 'death' and then updates state with a true for dead.
-          // console.log(doc.categories().find((cat) => cat.match(/deaths/)));
-          const deathEntry = doc
-            .categories()
-            .find((cat) => cat.match(/deaths/));
-          // console.log(Boolean(deathEntry));
-          if (Boolean(deathEntry)) {
-            this.setState((state) => {
-              return { info: "dead" };
-            });
-          }
-          // Checks returned categories for the words 'fictional' or 'character' and then updates state with a true for fictional character.
-          const fictionalEntry = doc
-            .categories()
-            .find((cat) => cat.match(/Fictional/) || cat.match(/character/));
-          // console.log(Boolean(fictionalEntry));
-          if (Boolean(fictionalEntry)) {
-            this.setState((state) => {
-              return { info: "fictional" };
-            });
-          }
+        console.log(doc); //For diagnosis on bad outcomes
 
-          // If a proper name was returned, update state with that string.
-          if (doc.data.title) {
-            this.setState((state) => {
-              return { properName: doc.data.title };
-            });
-          }
-          // If an image exists, update state with the URL.
-          if (doc.images(0)) {
-            this.setState((state) => {
-              return { resultImg: doc.images(0).thumbnail() };
-            });
-          }
-          // Checks state to see if search results came back with a person, if it didn't, it udpates state with no person found to send to Results.
-          if (this.state.info === "") {
+        if (doc === null) {
+          //Checks results for null and returns error
+          return this.setState((state) => {
+            return { error: "No results", properName: "", resultImg: "" };
+          });
+        } else if (
+          doc.categories().length === 0 ||
+          doc.categories().find((cat) => cat.match(/disambiguation/))
+        ) {
+          //Checks for empty categories or diagambiguation, meaning multiple results) and returns error
+          return this.setState((state) => {
+            return { error: "Too many options", properName: "", resultImg: "" };
+          });
+        } else if (doc.categories().find((cat) => cat.match(/Living people/))) {
+          // Checks for living person in categories and returns info
+          this.setState((state) => {
+            return {
+              info: "living",
+              searchTerm: "",
+              properName: doc.data.title,
+              resultImg: doc.images(0)
+                ? doc.images(0).thumbnail()
+                : "./defaultImg.png",
+            };
+          });
+        } else if (
+          doc.categories().find((cat) => cat.match(/Deaths|Death|deaths|death/))
+        ) {
+          // Checks for death in categories
+          if (
+            doc
+              .categories()
+              .find((cat) => cat.match(/Deaths|Death|deaths|death/))
+              .split(" ")
+              .find((cat) => cat.match(/animal|Animal/))
+          ) {
+            // Checks for animal and returns results with animal
             this.setState((state) => {
               return {
-                properName: "",
-                resultImg: "",
-                error: true,
+                info: "animal",
+                searchTerm: "",
+                properName: doc.data.title,
+                resultImg: doc.images(0)
+                  ? doc.images(0).thumbnail()
+                  : "./defaultImg.png",
+              };
+            });
+          } else if (
+            doc.categories().find((cat) => cat.match(/coronavirus pandemic/))
+          ) {
+            // Checks for coronavirus pandemic and returns results for pandemic
+            this.setState((state) => {
+              return {
+                info: "Covid19 death",
+                searchTerm: "",
+                properName: doc.data.title,
+                resultImg: doc.images(0)
+                  ? doc.images(0).thumbnail()
+                  : "./defaultImg.png",
+              };
+            });
+          } else if (
+            doc
+              .categories()
+              .find((cat) => cat.match(/Deaths|Death|deaths|death/))
+              .split(" ")
+              .find((cat) => cat.match(/2020/))
+          ) {
+            // Checks for 2020 death and returns maybe covid19 result
+            this.setState((state) => {
+              return {
+                info: "Maybe covid19",
+                searchTerm: "",
+                properName: doc.data.title,
+                resultImg: doc.images(0)
+                  ? doc.images(0).thumbnail()
+                  : "./defaultImg.png",
+              };
+            });
+          } else {
+            // Otherwise returns older death results
+            this.setState((state) => {
+              return {
+                info: "Not covid19",
+                searchTerm: "",
+                properName: doc.data.title,
+                resultImg: doc.images(0)
+                  ? doc.images(0).thumbnail()
+                  : "./defaultImg.png",
               };
             });
           }
-        } else {
-          // Sends "nothing found" message to state->Results when nothing is returned from Wikipedia.
+        } else if (
+          doc.categories().find((cat) => cat.match(/Fictional|character/))
+        ) {
+          // Checks categories for fictional or character then returns results
           this.setState((state) => {
-            return { error: true };
+            return {
+              info: "fictional",
+              searchTerm: "",
+              properName: doc.data.title,
+              resultImg: doc.images(0)
+                ? doc.images(0).thumbnail()
+                : "./defaultImg.png",
+            };
           });
         }
-        // Sends state after updated with results to the Results component.
+        // If no errors, send results to SearchApp component
         if (this.state.error === false) {
           this.props.action(this.state);
         }
       });
-    // Resets the input bar for new search.
-    this.setState((state) => {
-      return { searchTerm: "" };
-    });
   }
 
   render() {
-    const errorText = (
-      <span>
-        No <span>🎲</span> dice 🎲! 🤷 Try again!
-      </span>
-    );
+    let errorText = "";
+    if (this.state.error === "Too many options") {
+      errorText = (
+        <span>
+          😅 🤪 Too many results! 🤯 😬
+          <br /> Try adding the person's profession in parentheses: e.g.,
+          <br />
+          Chris Evans (actor) 🎭
+          <br /> Jack Johnson (musician) 🎸
+        </span>
+      );
+    } else if (this.state.error === "No results") {
+      errorText = (
+        <span>
+          No{" "}
+          <span role="img" aria-label="dice emoji">
+            🎲
+          </span>{" "}
+          dice{" "}
+          <span role="img" aria-label="dice emoji">
+            🎲
+          </span>
+          !<br />
+          <span role="img" aria-label="shrugging man emoji">
+            🤷
+          </span>{" "}
+          Try again!
+        </span>
+      );
+    }
+
     return (
       <div className="searchBar">
         <form onSubmit={this.handleSubmit}>
@@ -200,8 +267,8 @@ class SearchBar extends React.Component {
               ☠️
             </span>
           </button>
+          <p id="error">{errorText}</p>
         </form>
-        <p id="error">{this.state.error ? errorText : null}</p>
       </div>
     );
   }

@@ -22,6 +22,7 @@ body {
 }
 
 h1 {
+  font-family: "Permanent Marker", cursive;
   text-align: center;
   font-size: 36px;
   margin-bottom: 20px;
@@ -67,8 +68,8 @@ input {
 
 #error {
   color: red;
+  font-size: 23px;
   font-weight: bold;
-  font-size: 28px;
 }
 
 #discl-div {
@@ -76,7 +77,21 @@ input {
 }
 
 #discl-div p {
-  margin: 10px auto;
+  font-size: 24px;
+  margin: 20px auto;
+}
+
+#discl-div p a {
+  font-size: 16px;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  display: block;
+  background-color: #2e86de;
+  border-radius: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 #discl-btn {
@@ -86,6 +101,28 @@ input {
   cursor: pointer;
   font-size: 40px;
   z-index: 10;
+}
+
+.onBtn {
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+  -webkit-transition-timing-function: cubic-bezier(1, -0.4, 0.01, 1.37);
+          transition-timing-function: cubic-bezier(1, -0.4, 0.01, 1.37);
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+.offBtn {
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+  -webkit-transition-timing-function: cubic-bezier(1, -0.4, 0.01, 1.37);
+          transition-timing-function: cubic-bezier(1, -0.4, 0.01, 1.37);
+  -webkit-transform: rotate(-360deg);
+          transform: rotate(-360deg);
 }
 
 #discl-text {
@@ -239,9 +276,9 @@ span.skull {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(17, 17, 17, 0.95);
   z-index: 19;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -253,6 +290,7 @@ span.skull {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  overflow-x: hidden;
 }
 
 #resultsContainer {
@@ -273,17 +311,18 @@ span.skull {
 
 #resultsContainer #imgCanvas {
   position: relative;
+  min-height: 450px;
 }
 
 #resultsContainer #imgCanvas img {
   width: 95%;
   max-width: 450px;
-  margin: 0px auto;
+  margin: 0 auto;
   display: block;
 }
 
 #resultsContainer #imgCanvas span {
-  font-size: 35px;
+  font-size: 50px;
   position: absolute;
   text-shadow: 1px 1px 3px #000000;
 }
@@ -291,16 +330,14 @@ span.skull {
 #resultsContainer #imgCanvas #resultsInfo {
   width: 100%;
   text-align: center;
-  font-size: 50px;
   position: absolute;
   font-family: "Permanent Marker", cursive;
   left: 50%;
-  bottom: -50px;
+  bottom: 3%;
   text-decoration: underline;
   text-transform: uppercase;
   z-index: 9;
   text-shadow: 2px 2px 4px #000000;
-  margin: 50px auto;
 }
 
 #resultsContainer #imgCanvas #easterEgg {
@@ -316,9 +353,41 @@ span.skull {
 #resultsContainer #close-btn {
   position: absolute;
   font-size: 26px;
-  top: 15px;
-  right: 15px;
+  top: 20px;
+  right: 20px;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+#resultsContainer #socialBtns {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+#resultsContainer #socialBtns a {
+  padding: 15px 20px;
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+#resultsContainer #socialBtns .tweetBtn {
+  background-color: #00acee;
+}
+
+#resultsContainer #socialBtns .fbBtn {
+  background-color: #3b5998;
 }
 
 #resultsContainer #name {
@@ -336,13 +405,15 @@ span.skull {
   }
   #h1Emoji1 {
     position: absolute;
-    top: 50px;
-    left: 35%;
+    font-size: 50px;
+    top: 37px;
+    left: 30%;
   }
   #h1Emoji2 {
     position: absolute;
-    top: 50px;
-    right: 35%;
+    font-size: 50px;
+    top: 37px;
+    right: 30%;
   }
   #resultsContainer #name {
     font-size: 35px;
@@ -354,11 +425,10 @@ span.skull {
     font-size: 18px;
   }
   h1 {
-    font-size: 10vw;
+    font-size: 8vw;
     margin-bottom: 55px;
   }
   p {
-    text-align: center;
     font-size: 26px;
   }
   #discl-text > p {

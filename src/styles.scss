@@ -11,7 +11,6 @@ body {
   color: white;
   background-color: #222222;
   font-family: Helvetica, sans-serif;
-  // overflow-x: hidden;
 }
 
 .App {
@@ -25,6 +24,7 @@ body {
 }
 
 h1 {
+  font-family: "Permanent Marker", cursive;
   text-align: center;
   font-size: 36px;
   margin-bottom: 20px;
@@ -71,8 +71,8 @@ input {
 
 #error {
   color: red;
+  font-size: 23px;
   font-weight: bold;
-  font-size: 28px;
 }
 
 // STYLES FOR THE INFO/DISCLAIMER SECTION
@@ -81,7 +81,19 @@ input {
   padding: 20px 0px;
 
   p {
-    margin: 10px auto;
+    font-size: 24px;
+    margin: 20px auto;
+
+    a {
+      font-size: 16px;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      display: block;
+      background-color: #2e86de;
+      border-radius: 10px;
+      width: fit-content;
+    }
   }
 }
 
@@ -92,6 +104,18 @@ input {
   cursor: pointer;
   font-size: 40px;
   z-index: 10;
+}
+
+.onBtn {
+  transition: transform 0.6s;
+  transition-timing-function: cubic-bezier(1, -0.4, 0.01, 1.37);
+  transform: rotate(360deg);
+}
+
+.offBtn {
+  transition: transform 0.6s;
+  transition-timing-function: cubic-bezier(1, -0.4, 0.01, 1.37);
+  transform: rotate(-360deg);
 }
 
 #discl-text {
@@ -182,13 +206,14 @@ span.skull {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
-  background-color: rgba($color: black, $alpha: 0.9);
+  background-color: rgba($color: #111111, $alpha: 0.95);
   z-index: 19;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-x: hidden;
 }
 #resultsContainer {
   margin: 0 auto;
@@ -200,15 +225,16 @@ span.skull {
 
   #imgCanvas {
     position: relative;
+    min-height: 450px;
 
     img {
       width: 95%;
       max-width: 450px;
-      margin: 0px auto;
+      margin: 0 auto;
       display: block;
     }
     span {
-      font-size: 35px;
+      font-size: 50px;
       position: absolute;
       text-shadow: 1px 1px 3px #000000;
     }
@@ -216,17 +242,16 @@ span.skull {
     #resultsInfo {
       width: 100%;
       text-align: center;
-      font-size: 50px;
       position: absolute;
       font-family: "Permanent Marker", cursive;
       left: 50%;
-      bottom: -50px;
+      bottom: 3%;
       text-decoration: underline;
       text-transform: uppercase;
       z-index: 9;
       text-shadow: 2px 2px 4px #000000;
-      margin: 50px auto;
     }
+
     #easterEgg {
       width: 100%;
       font-size: 25px;
@@ -241,9 +266,34 @@ span.skull {
   #close-btn {
     position: absolute;
     font-size: 26px;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+  #socialBtns {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+
+    a {
+      padding: 15px 20px;
+      font-size: 25px;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 10px;
+      border: 3px solid white;
+    }
+    .tweetBtn {
+      background-color: #00acee;
+    }
+    .fbBtn {
+      background-color: #3b5998;
+    }
   }
 
   #name {
@@ -263,14 +313,16 @@ span.skull {
 
   #h1Emoji1 {
     position: absolute;
-    top: 50px;
-    left: 35%;
+    font-size: 50px;
+    top: 37px;
+    left: 30%;
   }
 
   #h1Emoji2 {
     position: absolute;
-    top: 50px;
-    right: 35%;
+    font-size: 50px;
+    top: 37px;
+    right: 30%;
   }
   #resultsContainer {
     #name {
@@ -284,12 +336,11 @@ span.skull {
     }
   }
   h1 {
-    font-size: 10vw;
+    font-size: 8vw;
     margin-bottom: 55px;
   }
 
   p {
-    text-align: center;
     font-size: 26px;
   }
 

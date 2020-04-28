@@ -20,7 +20,7 @@ export class Disclaimer extends Component {
       <div id="discl-div">
         <span
           id="discl-btn"
-          className="flipH"
+          className={this.state.showingInfo ? "offBtn" : "onBtn"}
           onClick={this.toggleInfo}
           role="img"
           aria-label="speech bubble emoji"
@@ -47,6 +47,17 @@ export class Disclaimer extends Component {
             <span role="img" aria-label="heart emojis">
               ❤️❤️❤️❤️❤️
             </span>
+          </p>
+          <p>
+            Found a bug? Let us know!{" "}
+            <a
+              onClick={console.log("test")}
+              target="blank"
+              rel="noopener noreferrer"
+              href="mailto:contact@aretheystilla.live"
+            >
+              contact@aretheystilla.live
+            </a>
           </p>
         </div>
       </div>

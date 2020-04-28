@@ -10,6 +10,7 @@ export class SearchApp extends React.Component {
     this.state = {
       searchResults: {},
       displayResults: false,
+      displayChoice: false,
     };
     this.searchHandler = this.searchHandler.bind(this);
     this.closeHandler = this.closeHandler.bind(this);
