@@ -38,10 +38,11 @@
 //  -Make an actual logo(Used different font)                                   DONE
 //  -Play with emoji scaling more, tighter boundaries, more variety             DONE
 //  -Set different font sizes for individual strings                            DONE
+//  -Separate output for covid deaths and non-covid deaths                      DONE
+//  -Implement Google Analytics                                                 DONE
+//  -Have Che redo text and emoji arrays                                        DONE
 
 //  ISSUES IN PROGRESS
-//  -Have Che redo text and emoji arrays
-//  -Implement Google Analytics
 
 //  ISSUES ON PAUSE
 //  -Implement loading spinner for data retrieval time(maybe)
@@ -55,12 +56,17 @@
 //      {"Chris Evans": returns nothing}, (For now just return hints for generic names)
 //      {"Mike Jones": returns nothing}
 
-import React from "react";
+import React, { useEffect } from "react";
 import SearchApp from "./components/SearchApp.component";
 import Disclaimer from "./components/Disclaimer.component";
 import "./styles.css";
+import ReactGA from "react-ga";
 
 function App() {
+  useEffect(() => {
+    ReactGA.initialize("UA-164789762-1");
+    ReactGA.pageview("/");
+  }, []);
   return (
     <div className="App">
       <header>

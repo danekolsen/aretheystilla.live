@@ -27,7 +27,7 @@ h1 {
   font-family: "Permanent Marker", cursive;
   text-align: center;
   font-size: 36px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 p {
@@ -225,10 +225,10 @@ span.skull {
 
   #imgCanvas {
     position: relative;
-    min-height: 450px;
+    min-height: 375px;
 
     img {
-      width: 95%;
+      width: 85%;
       max-width: 450px;
       margin: 0 auto;
       display: block;
@@ -266,8 +266,8 @@ span.skull {
   #close-btn {
     position: absolute;
     font-size: 26px;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -275,7 +275,7 @@ span.skull {
   #socialBtns {
     width: 100%;
     margin: 0 auto;
-    margin-top: 30px;
+    margin: 30px 0px;
     display: flex;
     justify-content: space-evenly;
 
@@ -314,15 +314,15 @@ span.skull {
   #h1Emoji1 {
     position: absolute;
     font-size: 50px;
-    top: 37px;
-    left: 30%;
+    top: 0px;
+    left: 2%;
   }
 
   #h1Emoji2 {
     position: absolute;
     font-size: 50px;
-    top: 37px;
-    right: 30%;
+    top: 0px;
+    right: 2%;
   }
   #resultsContainer {
     #name {
@@ -336,8 +336,8 @@ span.skull {
     }
   }
   h1 {
-    font-size: 8vw;
-    margin-bottom: 55px;
+    font-size: 15vw;
+    line-height: 1;
   }
 
   p {

@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 
 export class Results extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export class Results extends React.Component {
             "ALIVE AF",
             "Stayin' Alive!",
             "Still Breathin'!",
+            "Heart pumpin' and feelin' good!",
           ],
           emoji: [
             ["🎉", "🎊", "✨", "🌈", "🥇", "💋", "⭐️", "🌟"],
@@ -25,41 +27,24 @@ export class Results extends React.Component {
         covid19: {
           text: [
             "Confirmed Covid-19 death",
-            // "This person is dead!",
-            // "Kicked the bucket!",
-            // "DEAD AF",
-            // "Another one bites the dust!!!",
-            // "OH NOES!",
+            "This person is dead from the 'rona!",
+            "The 'rona got me!",
+            "Another one bites the dust!!!",
+            "OH NOES! Covid-19 death!",
           ],
           emoji: [
-            ["⚰️", "☠️", "👻", "💀", "🙅‍♀️", "🙅‍♂️"],
+            ["🦠", "🌡", "🏥", "🚑", "😷", "🤒"],
             ["😵", "😢", "🙁", "😩", "🥺", "😭", "😳", "😱"],
-            ["👀", "👼", "🕯", "💔", "❌", "🚫", "💐", "🔚"],
-          ],
-        },
-        maybeCovid19: {
-          text: [
-            "Maybe died of Covid-19...?",
-            // "This person is dead!",
-            // "Kicked the bucket!",
-            // "DEAD AF",
-            // "Another one bites the dust!!!",
-            // "OH NOES!",
-          ],
-          emoji: [
-            ["⚰️", "☠️", "👻", "💀", "🙅‍♀️", "🙅‍♂️"],
-            ["😵", "😢", "🙁", "😩", "🥺", "😭", "😳", "😱"],
-            ["👀", "👼", "🕯", "💔", "❌", "🚫", "💐", "🔚"],
+            ["👀", "👼", "🕯", "💔", "💐", "⚰️", "☠️", "👻", "💀"],
           ],
         },
         notCovid19: {
           text: [
             "Dead, but not of Covid-19",
-            // "This person is dead!",
-            // "Kicked the bucket!",
-            // "DEAD AF",
-            // "Another one bites the dust!!!",
-            // "OH NOES!",
+            "This person is dead!",
+            "Kicked the bucket!",
+            "DEAD AF",
+            "OH NOES!",
           ],
           emoji: [
             ["⚰️", "☠️", "👻", "💀", "🙅‍♀️", "🙅‍♂️"],
@@ -83,8 +68,18 @@ export class Results extends React.Component {
           ],
         },
         animal: {
-          text: ["This is an animal!"],
-          emoji: [["🤨"]],
+          text: [
+            "This is an animal!",
+            "RAAAWR! (Try Again)",
+            "Things are lookin' wild in here!",
+            "Are we at the zoo?",
+            "IT'S SO FLUFFY!!!!",
+          ],
+          emoji: [
+            ["🤨", "😆", "😂", "🤣", "😅", "😳"],
+            ["😹", "🙈", "🙊", "🐶", "🐻", "🐒"],
+            ["👀"],
+          ],
         },
       },
     };
@@ -98,6 +93,15 @@ export class Results extends React.Component {
 
   getRandomFloat() {
     return (Math.random() + 1) * (this.getRandomInt(1) + 1);
+  }
+
+  socialBtnHandler(platform) {
+    // Data to Google Analytics
+    ReactGA.event({
+      category: "Social Media Share",
+      action: `Pressed ${platform} button`,
+      label: this.props.properName,
+    });
   }
 
   setFontSize(string) {
@@ -149,21 +153,6 @@ export class Results extends React.Component {
       ];
       easterEgg = "";
       easterEmoji = "";
-    } else if (this.props.results.info === "Maybe covid19") {
-      emoji1 = this.state.options.maybeCovid19.emoji[0][
-        this.getRandomInt(this.state.options.maybeCovid19.emoji[0].length)
-      ];
-      emoji2 = this.state.options.maybeCovid19.emoji[1][
-        this.getRandomInt(this.state.options.maybeCovid19.emoji[1].length)
-      ];
-      emoji3 = this.state.options.maybeCovid19.emoji[2][
-        this.getRandomInt(this.state.options.maybeCovid19.emoji[2].length)
-      ];
-      exclamation = this.state.options.maybeCovid19.text[
-        this.getRandomInt(this.state.options.maybeCovid19.text.length)
-      ];
-      easterEgg = "";
-      easterEmoji = "";
     } else if (this.props.results.info === "Not covid19") {
       emoji1 = this.state.options.notCovid19.emoji[0][
         this.getRandomInt(this.state.options.notCovid19.emoji[0].length)
@@ -198,12 +187,12 @@ export class Results extends React.Component {
       emoji1 = this.state.options.animal.emoji[0][
         this.getRandomInt(this.state.options.animal.emoji[0].length)
       ];
-      // emoji2 = this.state.options.animal.emoji[1][
-      //   this.getRandomInt(this.state.options.animal.emoji[1].length)
-      // ];
-      // emoji3 = this.state.options.animal.emoji[2][
-      //   this.getRandomInt(this.state.options.animal.emoji[2].length)
-      // ];
+      emoji2 = this.state.options.animal.emoji[1][
+        this.getRandomInt(this.state.options.animal.emoji[1].length)
+      ];
+      emoji3 = this.state.options.animal.emoji[2][
+        this.getRandomInt(this.state.options.animal.emoji[2].length)
+      ];
       exclamation = this.state.options.animal.text[
         this.getRandomInt(this.state.options.animal.text.length)
       ];
@@ -250,7 +239,7 @@ export class Results extends React.Component {
       easterEmoji = "👵👵👵👵";
     }
     if (this.props.results.properName === "Justin Trudeau") {
-      easterEgg = "";
+      easterEgg = "Hey hot stuff!!!";
       easterEmoji = "🇨🇦❤️🤍❤️🇨🇦👀🔥🔥🔥";
     }
     let twitterURL = `https://twitter.com/intent/tweet?text=Checking+on+my+fav+celeb+with+aretheystilla.live!+${this.props.results.properName}: ${exclamation} ${emoji1} ${emoji2} ${emoji3}&hashtags=aretheystillalive,covid19&url=http%3A%2F%2Faretheystilla.live`;
@@ -282,6 +271,7 @@ export class Results extends React.Component {
           </div>
           <div id="socialBtns">
             <a
+              onClick={this.socialBtnHandler("Twitter")}
               href={twitterURL}
               target="blank"
               rel="noopener noreferrer"
@@ -293,6 +283,7 @@ export class Results extends React.Component {
               Tweet
             </a>
             <a
+              onClick={this.socialBtnHandler("Facebook")}
               href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Faretheystilla.live%2F"
               className="fbBtn"
               target="blank"

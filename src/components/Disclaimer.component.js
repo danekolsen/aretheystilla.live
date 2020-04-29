@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from "react-ga";
 
 export class Disclaimer extends Component {
   constructor(props) {
@@ -10,6 +11,11 @@ export class Disclaimer extends Component {
     this.toggleInfo = this.toggleInfo.bind(this);
   }
   toggleInfo() {
+    // Send clicks to Google Analytics
+    ReactGA.event({
+      category: "Viewed Disclaimer",
+      action: `Pressed Disclaimer Button`,
+    });
     this.setState((state) => {
       return { showingInfo: !this.state.showingInfo };
     });

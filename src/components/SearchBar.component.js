@@ -1,5 +1,6 @@
 import React from "react";
 import wtf from "wtf_wikipedia";
+import ReactGA from "react-ga";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -75,6 +76,13 @@ class SearchBar extends React.Component {
       };
     });
 
+    // Data to Google Analytics
+    ReactGA.event({
+      category: "Perform Search",
+      action: "Pressed search button",
+      label: this.state.cleanedName,
+    });
+
     // Calls make spin function for obnoxious search button emoji animation.
     this.makeSpin();
 
@@ -140,24 +148,6 @@ class SearchBar extends React.Component {
             this.setState((state) => {
               return {
                 info: "Covid19 death",
-                searchTerm: "",
-                properName: doc.data.title,
-                resultImg: doc.images(0)
-                  ? doc.images(0).thumbnail()
-                  : "./defaultImg.png",
-              };
-            });
-          } else if (
-            doc
-              .categories()
-              .find((cat) => cat.match(/Deaths|Death|deaths|death/))
-              .split(" ")
-              .find((cat) => cat.match(/2020/))
-          ) {
-            // Checks for 2020 death and returns maybe covid19 result
-            this.setState((state) => {
-              return {
-                info: "Maybe covid19",
                 searchTerm: "",
                 properName: doc.data.title,
                 resultImg: doc.images(0)
