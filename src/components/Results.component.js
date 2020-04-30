@@ -242,7 +242,12 @@ export class Results extends React.Component {
       easterEgg = "Hey hot stuff!!!";
       easterEmoji = "🇨🇦❤️🤍❤️🇨🇦👀🔥🔥🔥";
     }
-    let twitterURL = `https://twitter.com/intent/tweet?text=Checking+on+my+fav+celeb+with+aretheystilla.live!+${this.props.results.properName}: ${exclamation} ${emoji1} ${emoji2} ${emoji3}&hashtags=aretheystillalive,covid19&url=http%3A%2F%2Faretheystilla.live`;
+    if (this.props.results.properName === "Ruth Bader Ginsburg") {
+      easterEgg = "THE NOTORIOUS RBG";
+      easterEmoji = "🔥🔥👑🔥🔥";
+    }
+
+    let twitterURL = `https://twitter.com/intent/tweet?text=Checking+on+my+fav+celeb+with+aretheystilla.live!+${this.props.results.properName}: ${exclamation} ${emoji1} ${emoji2} ${emoji3} @aretheystilla&hashtags=aretheystillalive,covid19`;
     return (
       <div className="results">
         <div id="resultsContainer">

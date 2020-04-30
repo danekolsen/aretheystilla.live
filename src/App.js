@@ -41,8 +41,11 @@
 //  -Separate output for covid deaths and non-covid deaths                      DONE
 //  -Implement Google Analytics                                                 DONE
 //  -Have Che redo text and emoji arrays                                        DONE
+//  -Harry Potter causes blank page to show up                                  DONE
+//  -Add easter egg for RBG(text: "NOTORIOUS RBG", emoji: "flames and crowns")  DONE
 
 //  ISSUES IN PROGRESS
+//  -Can we make content fit inside of the viewport so the disclaimer button always is visible on page load?
 
 //  ISSUES ON PAUSE
 //  -Implement loading spinner for data retrieval time(maybe)

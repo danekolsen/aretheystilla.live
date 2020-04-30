@@ -182,6 +182,11 @@ class SearchBar extends React.Component {
                 : "./defaultImg.png",
             };
           });
+        } else {
+          // acts as a catch all for cases that don't fit the rest of the code.(Harry Potter was causing blank results screen)
+          return this.setState((state) => {
+            return { error: "Too many options", properName: "", resultImg: "" };
+          });
         }
         // If no errors, send results to SearchApp component
         if (this.state.error === false) {
@@ -200,6 +205,7 @@ class SearchBar extends React.Component {
           <br />
           Chris Evans (actor) 🎭
           <br /> Jack Johnson (musician) 🎸
+          <br /> Harry Potter (character) 🧙
         </span>
       );
     } else if (this.state.error === "No results") {

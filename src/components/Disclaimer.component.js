@@ -57,7 +57,6 @@ export class Disclaimer extends Component {
           <p>
             Found a bug? Let us know!{" "}
             <a
-              onClick={console.log("test")}
               target="blank"
               rel="noopener noreferrer"
               href="mailto:contact@aretheystilla.live"
